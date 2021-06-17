@@ -15,7 +15,7 @@ public class DemoApplication {
 		final Option option = new Option("z", true, "ZooKeeper address");
 		options.addOption(option);
 
-		final CommandLineParser parser = new PosixParser();
+		final CommandLineParser parser = new DefaultParser();
 		CommandLine cmd = null;
 		try {
 			cmd = parser.parse(options, args);

@@ -53,13 +53,13 @@ public class Node {
 					System.out.println("connection lost, become slave");
 					role = "slave";
 				} else if(event.getType().equals(PathChildrenCacheEvent.Type.CONNECTION_RECONNECTED)) {
-					System.out.println("connection reconnected……");
+					System.out.println("connection connected……");
 					if(!becomeMaster(client, masterNodePath)){
 						becomeSlave(client, slaveNodePath);
 					}
 				}
 				else{
-					System.out.println("path changed: " + event.getData().getPath() + ", event: " + event.toString());
+					System.out.println("path changed: " + event.getData().getPath());
 				}
 
 			}
@@ -76,7 +76,7 @@ public class Node {
 	private boolean becomeMaster(CuratorFramework client, String masterNodePath){
 		//try to become master
 		try {
-			client.create().creatingParentContainersIfNeeded().withMode(CreateMode.EPHEMERAL_SEQUENTIAL)
+			client.create().creatingParentContainersIfNeeded().withMode(CreateMode.EPHEMERAL)
 					.forPath(masterNodePath, Longs.toByteArray(System.currentTimeMillis()));
 
 			System.out.println("succeeded to become master");
