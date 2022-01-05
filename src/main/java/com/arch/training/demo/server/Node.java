@@ -90,7 +90,7 @@ public class Node {
 	}
 
 	private boolean becomeSlave(CuratorFramework client, String slaveNodePath) throws Exception {
-		//try to become master
+		//try to become slave
 		try {
 			client.create().creatingParentContainersIfNeeded().withMode(CreateMode.EPHEMERAL)
 					.forPath(slaveNodePath, Longs.toByteArray(System.currentTimeMillis()));
